@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Get Fairhold</title>
+<meta name="description" content="Fairhold checks a broker's rate con PDF on your phone for signs the pay was changed. Get it for iPhone or Android.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B4F37">
+<link rel="icon" href="icon-192.png">
+<!--
+  The page every printed Fairhold QR opens (Kobe, Nov 4 2026). It works out which phone scanned it.
+  - A store link marked data-live="1" is LIVE: after a short "Opening..." with a Cancel button, the page opens that
+    phone's store. Coming Back shows the page (its address becomes ?pick=1 before it leaves), never with ?pick=1,
+    never after Cancel.
+  - Before launch the links are the test links (TestFlight, Play testing) and the page only shows them.
+  - ?s=<piece> names the printed piece. It is added to the Google Play link as an install referrer, and to the App Store
+    link as a campaign once data-apple-pt holds the provider token from App Store Connect. No cookies, no analytics.
+  Switch test/live ONLY with tools/set_mode.py: it changes the link, the flag, the button words and the note together.
+-->
+<style>
+:root { --green: #0B4F37; --green2: #116B4B; --paper: #F2F1EB; --ink: #17181A; --muted: #55585C; --line: #D9D7CD; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); }
+body { font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+.top { background: var(--green); color: #fff; padding: calc(22px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 26px max(20px, env(safe-area-inset-left, 0px)); }
+.wrap { max-width: 520px; margin: 0 auto; }
+.word { display: block; height: 30px; width: auto; }
+h1 { font-size: 32px; line-height: 1.05; letter-spacing: -0.02em; margin: 18px 0 10px; }
+.top p { margin: 0; color: #DCEBE3; }
+main { padding: 22px max(20px, env(safe-area-inset-right, 0px)) 28px max(20px, env(safe-area-inset-left, 0px)); }
+.btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none; color: #fff; background: var(--ink);
+  border-radius: 14px; padding: 16px 18px; font-weight: 700; font-size: 18px; margin-top: 12px; min-height: 60px; }
+.btn small { display: block; font-weight: 500; font-size: 14px; color: #C9CAC4; margin-top: 2px; }
+.btn .arrow { font-size: 22px; line-height: 1; }
+.btn:focus-visible, .going button:focus-visible { outline: 3px solid var(--green2); outline-offset: 3px; }
+.btn.other { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
+.btn.other small { color: var(--muted); }
+.note { font-size: 15px; color: var(--muted); margin: 10px 2px 0; }
+.note a { color: var(--green2); }
+.going { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; border: 1.5px solid var(--green2);
+  border-radius: 12px; padding: 12px 14px; font-weight: 600; }
+.going button { font: inherit; font-weight: 700; color: var(--green2); background: none; border: 0; padding: 8px 4px; cursor: pointer; }
+.lab { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--muted); margin: 26px 2px 0; text-transform: uppercase; }
+.how { margin: 8px 0 0; padding-left: 22px; }
+.how li { margin: 6px 0; }
+.fine { font-size: 13px; color: var(--muted); margin-top: 26px; border-top: 1px solid var(--line); padding-top: 14px; }
+.fine a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <img class="word" src="wordmark-white.svg" alt="fairhold" width="122" height="30">
+  <h1>Was this rate con changed?</h1>
+  <p>Fairhold checks the broker's rate con PDF on your phone for signs the pay was changed.</p>
+</div></div>
+<main><div class="wrap">
+  <div class="going" id="going" role="status" hidden><span id="going-text">Opening the store…</span><button type="button" id="cancel">Cancel</button></div>
+  <div id="links">
+    <a class="btn" id="ios" href="https://apps.apple.com/app/apple-store/id6829541304" data-live="1"
+       data-store="https://apps.apple.com/app/apple-store/id6829541304" data-apple-pt="">
+      <span>iPhone<small id="ios-sub">Get it on the App Store</small></span><span class="arrow" aria-hidden="true">›</span></a>
+    <p class="note" id="ios-note" hidden>Fairhold for iPhone is in testing. The link opens Apple's TestFlight app, which installs the test version.</p>
+    <a class="btn" id="android" href="https://play.google.com/apps/testing/com.lpj.holdback" data-live="0"
+       data-store="https://play.google.com/store/apps/details?id=com.lpj.holdback">
+      <span>Android<small id="android-sub">Join the test on Google Play</small></span><span class="arrow" aria-hidden="true">›</span></a>
+    <p class="note" id="android-note">Fairhold for Android is in a closed test. To join, email your Gmail address to
+      <a href="mailto:hello@itsthierry.com">hello@itsthierry.com</a>, then tap the button once you are added.</p>
+  </div>
+  <p class="lab">How it works</p>
+  <ol class="how">
+    <li>Get Fairhold on your phone.</li>
+    <li>Open the broker's rate con PDF in the app.</li>
+    <li>Red: signs the pay was changed. Green: no signs.</li>
+  </ol>
+  <p class="note">One free check a month. Your file stays on your phone.</p>
+  <p class="fine">Not proof of who changed a file or why. Not legal advice. Fairhold is not connected to any truck stop, carrier or broker.
+    Made by Boban Kostadinoski, Indiana. <a href="https://itsthierry.github.io/holdback-site/privacy">Privacy policy</a> · <a href="./">Support</a></p>
+</div></main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var s = ((q.get('s') || 'qr').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 24)) || 'qr';
+  var pick = q.get('pick') === '1';
+  var ua = navigator.userAgent || '';
+  var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var android = !ios && /Android/i.test(ua);
+  var iosA = document.getElementById('ios'), andA = document.getElementById('android');
+  function live(a) { return a.getAttribute('data-live') === '1'; }
+
+  // Store links carry the piece name (the button words and notes are already right: set_mode.py writes them).
+  if (live(iosA)) {
+    var pt = iosA.getAttribute('data-apple-pt');
+    if (pt) iosA.href = iosA.getAttribute('data-store') + '?pt=' + encodeURIComponent(pt) + '&ct=' + encodeURIComponent(s) + '&mt=8';
+  }
+  if (live(andA)) {
+    andA.href = andA.getAttribute('data-store') + '&referrer=' +
+      encodeURIComponent('utm_source=fairhold-print&utm_medium=qr&utm_campaign=' + s);
+  }
+
+  // This phone's link first; the other one stays below, lighter, for a friend's phone.
+  var mine = ios ? iosA : (android ? andA : null);
+  if (!mine) return;
+  var other = mine === iosA ? andA : iosA;
+  var links = document.getElementById('links');
+  var mineNote = document.getElementById(mine.id + '-note'), otherNote = document.getElementById(other.id + '-note');
+  links.insertBefore(mineNote, links.firstChild);
+  links.insertBefore(mine, mineNote);
+  other.classList.add('other');
+  other.querySelector('small').textContent += ' (other phone)';
+  links.appendChild(other); links.appendChild(otherNote);
+
+  // Open the store after a moment the visitor can cancel. Never with ?pick=1. Before leaving, this page's own address
+  // becomes ?pick=1 (history.replaceState, nothing stored), so Back shows the page; a new scan still opens the store.
+  if (!live(mine) || pick) return;
+  var bar = document.getElementById('going');
+  document.getElementById('going-text').textContent = mine === iosA ? 'Opening the App Store…' : 'Opening Google Play…';
+  bar.hidden = false;
+  var timer = setTimeout(function () {
+    try { var here = new URL(location.href); here.searchParams.set('pick', '1'); history.replaceState(null, '', here.toString()); } catch (e) { /* old browser: Back may open the store again */ }
+    bar.hidden = true;
+    location.href = mine.href;
+  }, 1200);
+  document.getElementById('cancel').addEventListener('click', function () { clearTimeout(timer); bar.hidden = true; });
+})();
+</script>
+</body>
+</html>
