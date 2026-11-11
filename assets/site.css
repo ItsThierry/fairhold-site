@@ -1,0 +1,238 @@
+/* Fairhold home, round 4. Mobile first (390 px), then wider. */
+@font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-800.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("fonts/inter-tight-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("fonts/inter-tight-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("fonts/inter-tight-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+/* metric-matched fallbacks: while a web font is still loading, Arial is drawn at the same width and line metrics,
+   so nothing moves when the real font arrives (layout shift 0) */
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 500; size-adjust: 97.63%; ascent-override: 99.23%; descent-override: 24.71%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 600; size-adjust: 93.25%; ascent-override: 103.89%; descent-override: 25.87%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 700; size-adjust: 95.21%; ascent-override: 101.75%; descent-override: 25.33%; line-gap-override: 0%; }
+@font-face { font-family: "Bricolage Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 800; size-adjust: 98.40%; ascent-override: 94.51%; descent-override: 27.44%; line-gap-override: 0%; }
+/* figures and $: the papers use tabular figures, wider than Arial's */
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 500; unicode-range: U+0024, U+0030-0039; size-adjust: 108.92%; ascent-override: 88.94%; descent-override: 22.15%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 600; unicode-range: U+0024, U+0030-0039; size-adjust: 112.92%; ascent-override: 85.79%; descent-override: 21.36%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 700; unicode-range: U+0024, U+0030-0039; size-adjust: 115.95%; ascent-override: 83.55%; descent-override: 20.80%; line-gap-override: 0%; }
+
+:root {
+  --forest: #0B4F37;      /* brand deep green */
+  --green: #116B4B;       /* brand green; also the app's green answer */
+  --paper: #F2F1EB;       /* the app's paper */
+  --sheet: #FFFFFF;       /* the rate con */
+  --ink: #17181A;
+  --ink2: #3B3E42;
+  --muted: #55585C;
+  --line: #D6D4CA;
+  --red: #B23B32;         /* the app's red answer, used for nothing else */
+  --gold: #F2C95A;        /* the coin in the logo: Free, on green */
+  --on-green: #FFFFFF;
+  --on-green-2: #D3E6DB;
+  --pw: min(358px, calc(100vw - 32px));   /* phone frame width */
+  --display: "Bricolage Grotesque", "Bricolage Fallback", system-ui, sans-serif;
+  --text: "Inter Tight", "Inter Tight Fallback", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 500 18px/1.45 var(--text); }
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, figure { margin: 0; }
+a { color: inherit; }
+b { font-weight: 700; }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; border-radius: 6px; }
+
+.skip:focus-visible { outline-color: var(--gold); }
+.skip { position: absolute; left: 12px; top: -80px; z-index: 5; background: var(--paper); color: var(--forest); padding: 12px 16px; border-radius: 8px; font-weight: 700; }   /* a paper button on the forest band */
+.skip:focus { top: 12px; }
+
+/* ---------- header: the name and the icon, nothing else ---------- */
+.top { padding: 8px 20px 0; max-width: 1280px; margin: 0 auto; }
+.brand:focus-visible { outline-color: var(--gold); }
+/* the masthead: the name and the headline on the brand's deep green, edge to edge (the badge stays on paper) */
+.top, h1 { border-image: linear-gradient(var(--forest), var(--forest)) fill 0 / / 0 100vmax; }   /* one paint, no seam, no sideways scroll */
+.brand { display: inline-flex; align-items: center; gap: 10px; min-height: 56px; text-decoration: none; }
+.brand img:first-child { width: 40px; height: 40px; border-radius: 10px; }
+.brand-word { width: 114px; height: 28px; }
+
+/* ---------- first screen ---------- */
+.stage { padding: 0 20px; }
+.intro { padding: 0 0 8px; }
+h1 { font: 800 clamp(38px, 10.3vw, 66px)/1.02 var(--display); letter-spacing: -0.022em; color: var(--paper); max-width: none; padding: 6px 0 24px; text-wrap: balance; }
+.what { margin-top: 18px; font-size: 19px; line-height: 1.42; color: var(--ink); max-width: 31em; }
+.keep { white-space: nowrap; }   /* "rate con" is one term: never "rate / con" in the headline */
+.t-red { color: var(--red); }
+.t-green { color: var(--green); }
+
+/* Apple's badge: as is, 52 px tall, a quarter of its height (13 px) clear on every side; focus ring only around its link */
+.badge { display: inline-block; margin: 22px 0 0; line-height: 0; border-radius: 10px; }
+.badge img { width: auto; height: 52px; }
+.badge:focus-visible { outline-offset: 6px; }
+
+/* the badge and Free, with a small real iPhone beside them on phones and tablets (the big ones follow below) */
+.act { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "badge mini" "free mini" "droid droid"; grid-template-rows: auto 1fr auto; column-gap: 16px; align-items: start; }
+.act .badge { grid-area: badge; justify-self: start; }
+.act .free { grid-area: free; margin-top: 30px; }   /* keeps the tall F of Free out of the badge clear space */
+.mini { grid-area: mini; width: 112px; margin-top: 14px; }
+.act .droid { grid-area: droid; }
+
+.free { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 0; margin-top: 18px; }
+.free b { font: 800 50px/1 var(--display); letter-spacing: -0.025em; color: var(--forest); }   /* green is kept for the green answer */
+.free-tx { font-size: 18px; font-weight: 600; color: var(--ink); line-height: 1.3; text-wrap: balance; }
+.what, .ex-sub, .says, .get-fine, .pro-tx, .pro-fine, .foot-fine p, .d-note, .pro-price { text-wrap: pretty; }   /* no single word left alone on a last line */
+
+.droid { margin-top: 8px; font-size: 16px; line-height: 24px; color: var(--muted); }
+.droid a { display: inline-block; padding: 12px 0; font-weight: 600; color: var(--ink2); text-underline-offset: 3px; }
+
+/* ---------- the two examples: paper, what Fairhold says, the phone ---------- */
+.ex { padding-top: 48px; }
+.ex-red { --c: var(--red); --tint: #FBEEEC; --edge: rgba(178, 59, 50, .34); }
+.ex-green { --c: var(--green); --tint: #E9F2ED; --edge: rgba(17, 107, 75, .34); }
+.ex-h { font: 800 30px/1.1 var(--display); letter-spacing: -0.015em; color: var(--c); }
+.ex-sub { margin-top: 4px; font-size: 18px; font-weight: 600; color: var(--ink2); }
+
+/* the rate con itself: a plain white sheet, typeset like the paper drivers get */
+.paper { margin-top: 16px; }
+.doc { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 18px 18px 14px;
+  box-shadow: 0 1px 0 rgba(23, 24, 26, .04), 0 14px 28px -18px rgba(23, 24, 26, .28); font-variant-numeric: tabular-nums; }
+.d-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+.d-title { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.d-no { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.d-no b { color: var(--ink); font-size: 17px; }
+.d-row { display: flex; gap: 10px; margin-top: 10px; font-size: 16px; }
+.d-row span { color: var(--muted); }
+.d-lane { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; margin-top: 6px; font-size: 17px; }
+.d-lane span { color: var(--muted); }
+.d-lane .arr { display: block; }   /* drawn: the fonts have no arrow glyph, so a text arrow fell back to a system font */
+.d-dates { display: flex; gap: 18px; font-size: 14px; color: var(--muted); }
+.d-lines { margin-top: 12px; border-top: 1px solid var(--line); }
+.d-lines p, .d-total { display: flex; justify-content: space-between; gap: 12px; }
+.d-lines p { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+.d-lines b { font-weight: 600; }
+.d-total { margin-top: 2px; padding: 10px 0 4px; border-top: 3px double var(--ink); font-size: 22px; font-weight: 700; }
+.d-total b { font-size: 26px; letter-spacing: -0.01em; }
+.d-note { margin-top: 10px; font-size: 13px; color: var(--muted); }
+
+/* what is inside the file: set apart from the sheet, in the answer's colour, because no one sees it by looking */
+.file { margin-top: 10px; padding: 12px 18px 13px; background: var(--tint); border: 1px solid var(--edge); border-radius: 6px; font-variant-numeric: tabular-nums; }
+.file-h { font-size: 15px; font-weight: 700; color: var(--c); }
+.file-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 4px; font-size: 17px; }
+.file-row span { color: var(--ink2); }
+.file-row b { color: var(--c); white-space: nowrap; }
+
+/* what Fairhold says about the paper: one statement on a rule in the answer's colour, running down to the phone */
+.says { position: relative; margin-top: 20px; padding: 2px 0 2px 24px; font-size: 19px; line-height: 1.42; color: var(--ink2); }
+.says::before { content: ""; position: absolute; left: 6px; top: 4px; bottom: -14px; width: 4px; border-radius: 2px; background: var(--c); transform-origin: top; }
+.says::after { content: ""; position: absolute; left: 0; bottom: -24px; border: 8px solid transparent; border-top: 10px solid var(--c); border-bottom: 0; }
+.says-lead { display: block; font: 800 24px/1.15 var(--display); letter-spacing: -0.01em; color: var(--c); margin-bottom: 4px; }
+.says b { color: var(--c); }
+
+/* Apple's iPhone frame, straight on and whole; the app's still sits in its screen, clipped to the screen's corners */
+.phone { margin: 34px 0 0 calc((100% - var(--pw)) / 2); width: var(--pw); }   /* centred on the screen even when 8 px wider than the column */
+.phone-in { position: relative; aspect-ratio: 1350 / 2760; }
+.phone-scr { position: absolute; left: 5.3333%; top: 2.5%; width: 89.3333%; height: 95%; border-radius: 15.75% / 7.25%; object-fit: cover; }
+.phone-frame { position: absolute; inset: 0; width: 100%; height: 100%; }
+.phone figcaption { margin-top: 10px; text-align: center; font-size: 15px; color: var(--muted); }
+
+/* a plain text install button after the red result: for the driver who is sold right there */
+.ex-get { margin-top: 22px; }
+.ex-get a { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 14px; border: 2px solid var(--forest);
+  border-radius: 12px; color: var(--forest); font-weight: 700; font-size: 18px; text-decoration: none; }
+.ex-get a span { font-size: 26px; line-height: 1; }
+
+/* ---------- install again, and the price ---------- */
+.get { margin-top: 56px; background: var(--forest); color: var(--on-green); padding: 52px 20px 48px; }
+.get-in { max-width: 640px; margin: 0 auto; }
+.get-icon { width: 64px; height: 64px; border-radius: 15px; }
+.get-h { margin-top: 18px; font: 800 34px/1.06 var(--display); letter-spacing: -0.02em; max-width: 13em; text-wrap: balance; }
+.get-fine { margin-top: 14px; font-size: 16px; color: var(--on-green-2); max-width: 30em; }
+.get-b { margin-top: 28px; background: var(--paper); color: var(--ink); border-radius: 18px; padding: 22px 20px 22px; }
+.get .badge { margin-top: 0; }
+.get .free { margin-top: 30px; }   /* clear of the badge's 13 px space, like the first screen */
+.pro { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+.pro-h { font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--ink); text-wrap: balance; }
+.pro-tx { margin-top: 6px; font-size: 16px; color: var(--ink2); }
+.pro-price { margin-top: 8px; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--ink); font-variant-numeric: tabular-nums; }   /* plainly readable, still far quieter than Free (50 px) */
+.nw { white-space: nowrap; }
+.pro-fine { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--muted); }
+
+/* ---------- footer ---------- */
+.foot { padding: 36px 20px 40px; color: var(--muted); }
+.foot-in { max-width: 1184px; margin: 0 auto; }
+.foot-word { width: 122px; height: 30px; }
+.foot-nav { margin-top: 12px; display: flex; flex-wrap: wrap; column-gap: 24px; }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 48px; color: var(--forest); font-size: 17px; font-weight: 600; text-underline-offset: 3px; }
+.foot-fine { margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 14px; line-height: 1.5; }
+.foot-fine p { max-width: 44em; }   /* about 80 characters a line; the rule above still runs the full width */
+
+/* the one motion: the rule from the paper to the phone draws itself as you reach it */
+@media (prefers-reduced-motion: no-preference) {
+  .rv [data-reveal]::before { transform: scaleY(0); transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+  .rv [data-reveal]::after { opacity: 0; transition: opacity .25s ease .45s; }
+  .rv [data-reveal].on::before { transform: none; }
+  .rv [data-reveal].on::after { opacity: 1; }
+}
+
+/* ---------- 720 px and up: each example becomes paper | phone ---------- */
+@media (min-width: 720px) {
+  :root { --pw: 300px; }
+  .top { padding: 16px 32px 0; max-width: 760px; }   /* the logo on the same left edge as the headline and examples */
+  .stage { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .intro { padding-top: 0; max-width: 620px; }
+  h1 { padding: 14px 0 34px; }
+  .what { margin-top: 24px; }
+  .mini { width: 128px; margin-top: 22px; }   /* tablets keep the small iPhone in the first screen: the big one is still a scroll away; its top on the badge's top */
+  .act { grid-template-areas: "badge mini" "free mini" "droid mini"; grid-template-rows: auto auto 1fr; }   /* the Android line right under Free, beside the phone */
+  .ex { padding-top: 72px; display: grid; grid-template-columns: minmax(0, 1fr) var(--pw); column-gap: 36px;
+    grid-template-areas: "h h" "sub sub" "paper phone" "says phone" "get phone" "x phone"; grid-template-rows: auto auto auto auto auto 1fr; }
+  .ex-h { grid-area: h; }
+  .ex-sub { grid-area: sub; margin-bottom: 18px; }
+  .paper { grid-area: paper; margin-top: 0; }
+  .says { grid-area: says; margin-top: 22px; }
+  .ex-get { grid-area: get; justify-self: start; }
+  .says::before { bottom: 4px; }
+  .says::after { display: none; }
+  .phone { grid-area: phone; margin: 0; }
+  .get { margin-top: 80px; padding: 64px 32px 60px; }
+  .get-h { font-size: 42px; }
+  .foot { padding-left: 32px; padding-right: 32px; }
+  .get-in, .foot-in { max-width: 696px; }   /* the band and the footer on that same edge */
+}
+
+/* ---------- 1120 px and up: words | paper | phone ---------- */
+@media (min-width: 1120px) {
+  :root { --pw: 336px; }
+  .top { padding: 8px 48px; max-width: 1280px; }   /* 72 px: the icon 16 px from each edge of the band, as on phones */
+  /* wide screens: the headline sits in its column beside the edited example, so the band holds the name only */
+  h1 { color: var(--forest); border-image: none; padding: 0; max-width: 11.5em; }
+  h1 .keep { white-space: normal; }   /* the narrow column here would leave single words on lines (5 lines); 4 lines as accepted */
+  .what { margin-top: 14px; }
+  .stage { max-width: 1280px; padding: 0 48px; display: grid; grid-template-columns: minmax(0, 1fr) 392px var(--pw); column-gap: 56px; }
+  .intro { grid-column: 1; grid-row: 1; align-self: center; padding: 0 0 40px; max-width: none; }
+  .act { display: block; }
+  .mini { display: none; }   /* the big edited example is in the same view from here up */
+  h1 { font-size: 58px; }
+  .what { font-size: 20px; }
+  /* the edited one sits beside the first words */
+  .ex-red { grid-column: 2 / 4; grid-row: 1; padding-top: 24px; grid-template-columns: 392px var(--pw); column-gap: 56px; }
+  /* the clean one: its words in the first column, the paper and phone under the edited ones */
+  .ex-green { grid-column: 1 / 4; grid-row: 2; padding-top: 96px; grid-template-columns: minmax(0, 1fr) 392px var(--pw); column-gap: 56px;
+    grid-template-areas: "h paper phone" "sub paper phone" "says paper phone" "x paper phone"; grid-template-rows: auto auto auto 1fr; }
+  .ex-green .ex-sub { margin-bottom: 0; }
+  .ex-green .paper { align-self: start; }
+  .ex-get { display: none; }   /* the badge is in the same view up here */
+  .get { margin-top: 104px; padding: 80px 48px 76px; }
+  .get-in { max-width: 1184px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 56px; align-items: start; }
+  .get-h { font-size: 48px; }
+  .get-b { margin-top: 0; padding: 32px 32px 28px; }
+  .foot { padding: 44px 48px 44px; }
+  .foot-in { max-width: 1184px; }
+}
+
+/* 1120 to 1279 px: the same three columns, set narrower so the first words keep a readable column */
+@media (min-width: 1120px) and (max-width: 1279px) {
+  :root { --pw: 300px; }
+  .stage, .ex-green { grid-template-columns: minmax(0, 1fr) 340px var(--pw); column-gap: 40px; }
+  .ex-red { grid-template-columns: 340px var(--pw); column-gap: 40px; }
+  h1 { font-size: 50px; }
+  .what { font-size: 19px; }
+}

@@ -4,58 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Get Fairhold</title>
-<meta name="description" content="Fairhold checks a broker's rate con PDF on your phone for signs the pay was changed. Get it for iPhone or Android.">
+<meta name="description" content="Fairhold checks a rate con PDF or picture on your iPhone for signs the pay was edited. Free, with one rate con check every month.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0B4F37">
-<link rel="icon" href="icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fairhold">
+<meta property="og:title" content="Get Fairhold: spot an edited rate con before you haul">
+<meta property="og:description" content="Fairhold checks a rate con PDF or picture on your iPhone: the pay it finds, and whether the file shows signs of editing. Free, with one rate con check a month.">
+<meta property="og:image" content="https://fairhold.net/assets/img/og-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fairhold: spot an edited rate con before you haul. Free, with one rate con check every month. An iPhone shows the app's result for a sample rate con: Edited: Total $3,000 to $2,500.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/svg+xml" href="assets/brand/icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <!--
-  The page every printed Fairhold QR opens (Kobe, Nov 4 2026). It works out which phone scanned it.
+  The page every printed Fairhold QR opens. It works out which phone scanned it.
   - A store link marked data-live="1" is LIVE: after a short "Opening..." with a Cancel button, the page opens that
     phone's store. Coming Back shows the page (its address becomes ?pick=1 before it leaves), never with ?pick=1,
     never after Cancel.
-  - Before launch the links are the test links (TestFlight, Play testing) and the page only shows them.
+  - While a link is data-live="0" (Android today), its button stays hidden and its note shows instead: Android is coming
+    soon, with a mail link. No test link is shown.
   - ?s=<piece> names the printed piece. It is added to the Google Play link as an install referrer, and to the App Store
     link as a campaign once data-apple-pt holds the provider token from App Store Connect. No cookies, no analytics.
   Switch test/live ONLY with tools/set_mode.py: it changes the link, the flag, the button words and the note together.
 -->
 <style>
-:root { --green: #0B4F37; --green2: #116B4B; --paper: #F2F1EB; --ink: #17181A; --muted: #55585C; --line: #D9D7CD; }
+@font-face { font-family: "Bricolage Grotesque"; src: url("assets/fonts/bricolage-800.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("assets/fonts/inter-tight-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("assets/fonts/inter-tight-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+/* metric-matched fallbacks (as on the home page): nothing moves when the web fonts arrive */
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 500; size-adjust: 97.63%; ascent-override: 99.23%; descent-override: 24.71%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 700; size-adjust: 95.21%; ascent-override: 101.75%; descent-override: 25.33%; line-gap-override: 0%; }
+@font-face { font-family: "Bricolage Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 800; size-adjust: 98.40%; ascent-override: 94.51%; descent-override: 27.44%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 500; unicode-range: U+0024, U+0030-0039; size-adjust: 108.92%; ascent-override: 88.94%; descent-override: 22.15%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Tight Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 700; unicode-range: U+0024, U+0030-0039; size-adjust: 115.95%; ascent-override: 83.55%; descent-override: 20.80%; line-gap-override: 0%; }
+:root { --forest: #0B4F37; --green: #116B4B; --paper: #F2F1EB; --ink: #17181A; --ink2: #3B3E42; --muted: #55585C; --line: #D6D4CA;
+  --gold: #F2C95A; --on-green-2: #D3E6DB; }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 html, body { margin: 0; background: var(--paper); color: var(--ink); }
-body { font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; -webkit-text-size-adjust: 100%; }
+body { font: 500 18px/1.45 "Inter Tight", "Inter Tight Fallback", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
 [hidden] { display: none !important; }
-.top { background: var(--green); color: #fff; padding: calc(22px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 26px max(20px, env(safe-area-inset-left, 0px)); }
+img { display: block; }
+h1, h2, p, ol { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 6px; }
 .wrap { max-width: 520px; margin: 0 auto; }
-.word { display: block; height: 30px; width: auto; }
-h1 { font-size: 32px; line-height: 1.05; letter-spacing: -0.02em; margin: 18px 0 10px; }
-.top p { margin: 0; color: #DCEBE3; }
-main { padding: 22px max(20px, env(safe-area-inset-right, 0px)) 28px max(20px, env(safe-area-inset-left, 0px)); }
-.btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none; color: #fff; background: var(--ink);
-  border-radius: 14px; padding: 16px 18px; font-weight: 700; font-size: 18px; margin-top: 12px; min-height: 60px; }
-.btn small { display: block; font-weight: 500; font-size: 14px; color: #C9CAC4; margin-top: 2px; }
-.btn .arrow { font-size: 22px; line-height: 1; }
-.btn:focus-visible, .going button:focus-visible { outline: 3px solid var(--green2); outline-offset: 3px; }
-.btn.other { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
+.top { padding: calc(8px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px)); }
+.brand { display: inline-flex; align-items: center; gap: 10px; min-height: 56px; text-decoration: none; }
+.brand img:first-child { width: 40px; height: 40px; border-radius: 10px; }
+main { padding: 0 max(20px, env(safe-area-inset-right, 0px)) 40px max(20px, env(safe-area-inset-left, 0px)); }
+h1 { font: 800 36px/1.04 "Bricolage Grotesque", "Bricolage Fallback", system-ui, sans-serif; letter-spacing: -0.02em; color: var(--forest); text-wrap: balance; }
+/* the masthead, as on the home page: the name and the headline on the brand's deep green, edge to edge */
+.top { background: var(--forest); }
+h1 { color: var(--paper); border-image: linear-gradient(var(--forest), var(--forest)) fill 0 / / 0 100vmax; padding: 6px 0 22px; }
+.brand:focus-visible { outline-color: var(--gold); }
+.keep { white-space: nowrap; }   /* "rate con" is one term: never "rate / con" */
+.lead { margin-top: 18px; font-size: 18px; color: var(--ink2); }
+#links { margin-top: 22px; }
+.btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none; color: #fff; background: var(--forest);
+  border-radius: 14px; padding: 14px 20px; font-weight: 700; font-size: 22px; line-height: 1.15; margin-top: 12px; min-height: 72px; }
+.btn small { display: block; font-weight: 500; font-size: 16px; color: var(--on-green-2); margin-top: 3px; }
+.btn .arrow { font-size: 30px; line-height: 1; }
+.btn.other { background: #fff; color: var(--ink); border: 2px solid var(--line); min-height: 64px; font-size: 19px; }
 .btn.other small { color: var(--muted); }
-.note { font-size: 15px; color: var(--muted); margin: 10px 2px 0; }
-.note a { color: var(--green2); }
-.going { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; border: 1.5px solid var(--green2);
-  border-radius: 12px; padding: 12px 14px; font-weight: 600; }
-.going button { font: inherit; font-weight: 700; color: var(--green2); background: none; border: 0; padding: 8px 4px; cursor: pointer; }
-.lab { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--muted); margin: 26px 2px 0; text-transform: uppercase; }
-.how { margin: 8px 0 0; padding-left: 22px; }
-.how li { margin: 6px 0; }
-.fine { font-size: 13px; color: var(--muted); margin-top: 26px; border-top: 1px solid var(--line); padding-top: 14px; }
-.fine a { color: var(--muted); }
+#android[data-live="0"] { display: none; }   /* not on Google Play yet: the note below shows instead */
+.note { font-size: 16px; color: var(--muted); margin: 10px 2px 0; }
+#android-note { margin: 12px 0 0; padding: 16px 18px 6px; border: 2px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink); font-size: 18px; }
+#android-note b { display: block; font-size: 20px; }
+#android-note a { display: inline-flex; align-items: center; min-height: 48px; color: var(--forest); font-weight: 700; text-underline-offset: 3px; }
+.going { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; border: 2px solid var(--green);
+  border-radius: 14px; padding: 8px 8px 8px 16px; font-weight: 700; margin-top: 22px; }
+.going button { font: inherit; font-weight: 700; color: var(--forest); background: none; border: 0; min-height: 48px; padding: 0 14px; cursor: pointer; border-radius: 10px; }
+.free { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; margin-top: 26px; }
+.free b { font: 800 44px/1 "Bricolage Grotesque", "Bricolage Fallback", system-ui, sans-serif; letter-spacing: -0.02em; color: var(--forest); }
+.free span:last-child { font-weight: 700; flex-basis: 100%; }   /* always under Free, as on the home page */
+h2 { margin-top: 30px; font: 800 24px/1.1 "Bricolage Grotesque", "Bricolage Fallback", system-ui, sans-serif; color: var(--ink); }
+.how { margin-top: 10px; padding-left: 26px; }
+.how li { margin: 6px 0; padding-left: 4px; }
+.how li, .note { text-wrap: pretty; }   /* no single word alone on a last line */
+.how li::marker { font-weight: 700; color: var(--forest); }
+.r { color: #B23B32; font-weight: 700; }
+.g { color: var(--green); font-weight: 700; }
+.home { display: inline-flex; align-items: center; min-height: 48px; margin-top: 8px; color: var(--forest); font-weight: 700; text-underline-offset: 3px; }
+.foot { background: var(--forest); color: var(--on-green-2); padding: 28px max(20px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px)); }
+.foot-nav { display: flex; flex-wrap: wrap; column-gap: 22px; }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 48px; color: #fff; font-weight: 700; font-size: 16px; text-underline-offset: 3px; }
+.foot-fine { margin-top: 12px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .18); font-size: 14px; line-height: 1.5; }
+.foot-fine p + p { margin-top: 8px; }
+.foot :focus-visible { outline-color: var(--gold); }
 </style>
 </head>
 <body>
-<div class="top"><div class="wrap">
-  <img class="word" src="wordmark-white.svg" alt="fairhold" width="122" height="30">
-  <h1>Was this rate con changed?</h1>
-  <p>Fairhold checks the broker's rate con PDF on your phone for signs the pay was changed.</p>
-</div></div>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><img src="assets/brand/icon.svg" alt="" width="40" height="40"><img src="assets/brand/wordmark-white.svg" alt="Fairhold" width="114" height="28"></a>
+</div></header>
 <main><div class="wrap">
+  <h1>Spot an edited <span class="keep">rate con</span> before you haul.</h1>
+  <p class="lead">Fairhold reads the rate con on your phone. It shows the pay it finds, and any signs the file was edited.</p>
   <div class="going" id="going" role="status" hidden><span id="going-text">Opening the store…</span><button type="button" id="cancel">Cancel</button></div>
   <div id="links">
     <a class="btn" id="ios" href="https://apps.apple.com/app/apple-store/id6829541304" data-live="1"
@@ -65,19 +114,30 @@ main { padding: 22px max(20px, env(safe-area-inset-right, 0px)) 28px max(20px, e
     <a class="btn" id="android" href="https://play.google.com/apps/testing/com.lpj.holdback" data-live="0"
        data-store="https://play.google.com/store/apps/details?id=com.lpj.holdback">
       <span>Android<small id="android-sub">Join the test on Google Play</small></span><span class="arrow" aria-hidden="true">›</span></a>
-    <p class="note" id="android-note">Fairhold for Android is in a closed test. To join, email your Gmail address to
-      <a href="mailto:hello@itsthierry.com">hello@itsthierry.com</a>, then tap the button once you are added.</p>
+    <p class="note" id="android-note"><b>Android: coming soon.</b> Fairhold for Android is not out yet.
+      <a href="mailto:hello@fairhold.net?subject=Fairhold%20for%20Android">Email us to hear when it is out</a></p>
   </div>
-  <p class="lab">How it works</p>
+  <p class="free"><b>Free</b><span>One rate con check every month.</span></p>
+  <h2>How it works</h2>
   <ol class="how">
-    <li>Get Fairhold on your phone.</li>
-    <li>Open the broker's rate con PDF in the app.</li>
-    <li>Red: signs the pay was changed. Green: no signs.</li>
+    <li>Get Fairhold on your iPhone.</li>
+    <li>Open the rate con PDF or picture in the app.</li>
+    <li><span class="r">Red:</span> look again before you haul. <span class="g">Green:</span> no signs of editing were found.</li>
   </ol>
-  <p class="note">One free check a month. Your file stays on your phone.</p>
-  <p class="fine">Not proof of who changed a file or why. Not legal advice. Fairhold is not connected to any truck stop, carrier or broker.
-    Made by Boban Kostadinoski, Indiana. <a href="https://itsthierry.github.io/holdback-site/privacy">Privacy policy</a> · <a href="./">Support</a></p>
+  <p class="note">Your file stays on your phone. Always confirm the pay with the broker.</p>
+  <a class="home" href="./">See an edited and a clean rate con</a>
 </div></main>
+<footer class="foot"><div class="wrap">
+  <nav class="foot-nav" aria-label="Footer">
+    <a href="mailto:hello@fairhold.net?subject=Fairhold%20support">Support</a>
+    <a href="https://itsthierry.github.io/holdback-site/privacy">Privacy policy</a>
+    <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a>
+  </nav>
+  <div class="foot-fine">
+    <p>Fairhold helps you spot problems; it does not guarantee that a document is genuine and is not legal or tax advice. It cannot tell who changed a file, or why. Fairhold is not connected to any truck stop, carrier or broker. Fairhold LLC, Indiana. hello@fairhold.net</p>
+    <p>Apple, the Apple logo, and iPhone are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
+  </div>
+</div></footer>
 <script>
 (function () {
   var q = new URLSearchParams(location.search);
