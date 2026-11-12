@@ -26,7 +26,10 @@
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<script>if("IntersectionObserver" in window){document.documentElement.className+=" alive";setTimeout(function(){if(!window.__fhAlive)document.documentElement.classList.remove("alive")},3500)}</script>
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="sky" aria-hidden="true"><i></i><i></i><b></b></div>
 
 <header class="top">
   <a class="brand" href="./"><img src="assets/brand/icon.svg" alt="" width="40" height="40"><img class="brand-word" src="assets/brand/wordmark-white.svg" alt="Fairhold" width="114" height="28"></a>
@@ -38,7 +41,7 @@
 
     <!-- First screen: what it does, the App Store badge, Free -->
     <section class="intro" aria-labelledby="h1">
-      <h1 id="h1">Spot an edited <span class="keep">rate con</span> before you haul.</h1>
+      <h1 id="h1"><span class="w" style="--i:0">Spot</span> <span class="w" style="--i:1">an</span> <span class="w ed" style="--i:2">edited</span> <span class="keep"><span class="w" style="--i:3">rate</span> <span class="w" style="--i:4">con</span></span> <span class="w" style="--i:5">before</span> <span class="w" style="--i:6">you</span> <span class="w" style="--i:7">haul.</span></h1>
       <p class="what">Open or share a rate con PDF or picture with Fairhold. It shows the pay it finds. <span class="nw"><b class="t-red">Red:</b> look</span> again before you haul. <span class="nw"><b class="t-green">Green:</b> no</span> signs of editing were found.</p>
       <div class="act">
         <a class="badge" href="https://apps.apple.com/app/apple-store/id6829541304"><img src="assets/brand/app-store-badge.svg" alt="Download on the App Store" width="156" height="52"></a>
@@ -57,7 +60,7 @@
     <section class="ex ex-red" aria-labelledby="h-red">
       <h2 id="h-red" class="ex-h">An edited rate con</h2>
       <p class="ex-sub">Looks normal when you open it.</p>
-      <div class="paper">
+      <div class="paper" data-scan="red">
         <div class="doc" role="img" aria-label="Sample rate confirmation, made for this page, not a real load. Load 16602, Sample broker, Laredo, Texas to Oklahoma City, Oklahoma, Sep 24 to Sep 25, 2026. Linehaul $2,100.00, tracking $200.00, fuel surcharge $200.00. Total $2,500.00.">
           <div class="d-head"><p class="d-title">Rate confirmation</p><p class="d-no">Load no. <b>16602</b></p></div>
           <p class="d-row"><span>Broker</span><b>Sample broker</b></p>
@@ -93,7 +96,7 @@
     <section class="ex ex-green" aria-labelledby="h-green">
       <h2 id="h-green" class="ex-h">A clean rate con</h2>
       <p class="ex-sub">Looks normal when you open it, too.</p>
-      <div class="paper">
+      <div class="paper" data-scan="green">
         <div class="doc" role="img" aria-label="Sample rate confirmation, made for this page, not a real load. Load 20142, Sample broker, Joliet, Illinois to Columbus, Ohio, Sep 22 to Sep 23, 2026. Linehaul $1,600.00, fuel surcharge $250.00. Total $1,850.00.">
           <div class="d-head"><p class="d-title">Rate confirmation</p><p class="d-no">Load no. <b>20142</b></p></div>
           <p class="d-row"><span>Broker</span><b>Sample broker</b></p>
@@ -126,7 +129,7 @@
   </div>
 
   <!-- Install again, right after the examples; the price, Free first and Pro once, smaller -->
-  <section class="get" id="get" aria-labelledby="h-get">
+  <section class="get" id="get" aria-labelledby="h-get" data-film="assets/film/dawn.mp4" data-poster="assets/film/dawn.webp">
     <div class="get-in">
       <div class="get-a">
         <img class="get-icon" src="assets/brand/icon.svg" alt="" width="64" height="64">
@@ -160,6 +163,7 @@
     <div class="foot-fine">
       <p>Fairhold flags signs of pay changes. It cannot tell who changed a file, or why. It helps you spot problems; it does not guarantee that a document is genuine and is not legal or tax advice. Always confirm the pay with the broker. Fairhold is not connected to any truck stop, carrier or broker. The rate cons and app screens on this page use sample data.</p>
       <p>This website has no cookies, no analytics and no trackers.</p>
+      <p>The film of the truck on this page was made with AI.</p>
       <p>Apple, the Apple logo, and iPhone are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
       <p>&copy; 2026 Fairhold LLC, Indiana. hello@fairhold.net</p>
     </div>
