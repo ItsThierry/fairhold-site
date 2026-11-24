@@ -64,13 +64,14 @@ h1 { font: 800 clamp(38px, 10.3vw, 66px)/1.02 var(--display); letter-spacing: -0
 .t-green { color: var(--green); }
 
 /* Apple's badge: as is, 52 px tall, a quarter of its height (13 px) clear on every side; focus ring only around its link */
-.badge { display: inline-block; margin: 22px 0 0; line-height: 0; border-radius: 10px; }
+.badges { display: flex; flex-wrap: wrap; align-items: center; gap: 13px 16px; margin: 22px 0 0; }   /* App Store and Google Play: side by side when they fit, stacked when not; equal height */
+.badge { display: inline-block; margin: 0; line-height: 0; border-radius: 10px; }
 .badge img { width: auto; height: 52px; }
 .badge:focus-visible { outline-offset: 6px; }
 
 /* the badge and Free, with a small real iPhone beside them on phones and tablets (the big ones follow below) */
 .act { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "badge mini" "free mini" "droid droid"; grid-template-rows: auto 1fr auto; column-gap: 16px; align-items: start; }
-.act .badge { grid-area: badge; justify-self: start; }
+.act .badges { grid-area: badge; justify-self: start; }
 .act .free { grid-area: free; margin-top: 30px; }   /* keeps the tall F of Free out of the badge clear space */
 .mini { grid-area: mini; width: 112px; margin-top: 14px; }
 .act .droid { grid-area: droid; }
@@ -146,7 +147,7 @@ h1 { font: 800 clamp(38px, 10.3vw, 66px)/1.02 var(--display); letter-spacing: -0
 .get-h { margin-top: 18px; font: 800 34px/1.06 var(--display); letter-spacing: -0.02em; max-width: 13em; text-wrap: balance; }
 .get-fine { margin-top: 14px; font-size: 16px; color: var(--on-green-2); max-width: 30em; }
 .get-b { margin-top: 28px; background: var(--paper); color: var(--ink); border-radius: 18px; padding: 22px 20px 22px; }
-.get .badge { margin-top: 0; }
+.get .badges { margin-top: 0; }
 .get .free { margin-top: 30px; }   /* clear of the badge's 13 px space, like the first screen */
 .pro { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
 .pro-h { font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--ink); text-wrap: balance; }
