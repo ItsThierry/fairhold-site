@@ -65,12 +65,13 @@ h1 { color: var(--paper); border-image: linear-gradient(var(--forest), var(--for
 .keep { white-space: nowrap; }   /* "rate con" is one term: never "rate / con" */
 .lead { margin-top: 18px; font-size: 18px; color: var(--ink2); }
 #links { margin-top: 22px; }
-.btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none; color: #fff; background: var(--forest);
-  border-radius: 14px; padding: 14px 20px; font-weight: 700; font-size: 22px; line-height: 1.15; margin-top: 12px; min-height: 72px; }
-.btn small { display: block; font-weight: 500; font-size: 16px; color: var(--on-green-2); margin-top: 3px; }
-.btn .arrow { font-size: 30px; line-height: 1; }
-.btn.other { background: #fff; color: var(--ink); border: 2px solid var(--line); min-height: 64px; font-size: 19px; }
-.btn.other small { color: var(--muted); }
+#links { display: flex; flex-wrap: wrap; align-items: center; gap: 13px 16px; }   /* the official store badges, as on the home page:
+   side by side when they fit, stacked when not; the notes and the "Opening" bar take a full row */
+#links .note, #links #android-note { flex-basis: 100%; }
+.btn { display: inline-block; line-height: 0; border-radius: 10px; text-decoration: none; }
+.btn img { display: block; width: auto; height: 68px; }   /* 68 px tall = the App Store badge 204 px wide: the page's tap rule is 200 x 44 */
+.btn:focus-visible { outline-offset: 6px; }
+.btn .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 #android[data-live="0"] { display: none; }   /* not on Google Play yet: the note below shows instead */
 .note { font-size: 16px; color: var(--muted); margin: 10px 2px 0; }
 #android-note { margin: 12px 0 0; padding: 16px 18px 6px; border: 2px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink); font-size: 18px; }
@@ -109,18 +110,18 @@ h2 { margin-top: 30px; font: 800 24px/1.1 "Bricolage Grotesque", "Bricolage Fall
   <div id="links">
     <a class="btn" id="ios" href="https://apps.apple.com/app/apple-store/id6829541304" data-live="1"
        data-store="https://apps.apple.com/app/apple-store/id6829541304" data-apple-pt="">
-      <span>iPhone<small id="ios-sub">Get it on the App Store</small></span><span class="arrow" aria-hidden="true">›</span></a>
+      <img src="assets/brand/app-store-badge.svg" alt="" width="204" height="68"><span class="sr">iPhone<small id="ios-sub">Get it on the App Store</small></span></a>
     <p class="note" id="ios-note" hidden>Fairhold for iPhone is in testing. The link opens Apple's TestFlight app, which installs the test version.</p>
     <a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.lpj.holdback" data-live="1"
        data-store="https://play.google.com/store/apps/details?id=com.lpj.holdback">
-      <span>Android<small id="android-sub">Get it on Google Play</small></span><span class="arrow" aria-hidden="true">›</span></a>
+      <img src="assets/brand/google-play-badge.png" alt="" width="228" height="68"><span class="sr">Android<small id="android-sub">Get it on Google Play</small></span></a>
     <p class="note" id="android-note" hidden><b>Android: coming soon.</b> Fairhold for Android is not out yet.
       <a href="mailto:hello@fairhold.net?subject=Fairhold%20for%20Android">Email us to hear when it is out</a></p>
   </div>
   <p class="free"><b>Free</b><span>One rate con check every month.</span></p>
   <h2>How it works</h2>
   <ol class="how">
-    <li>Get Fairhold on your iPhone.</li>
+    <li>Get Fairhold on your phone.</li>
     <li>Open the rate con PDF or picture in the app.</li>
     <li><span class="r">Red:</span> look again before you haul. <span class="g">Green:</span> no signs of editing were found.</li>
   </ol>
